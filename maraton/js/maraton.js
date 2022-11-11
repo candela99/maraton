@@ -54,10 +54,24 @@ function generarTablaParticipantes() {
         .then(corredores => corredores.runners)
         .then(corr => {
             // Crea las celdas
+                var hilera0 = document.createElement("tr");
+
+                var celda00 = document.createElement("td");
+                celda00.appendChild(document.createTextNode("Nombre"))
+                var celda01 = document.createElement("td");
+                celda01.appendChild(document.createTextNode("Apellido"))
+                var celda02 = document.createElement("td");
+                celda02.appendChild(document.createTextNode("Sponsor"))
+                hilera0.appendChild(celda00);
+                hilera0.appendChild(celda01);
+                hilera0.appendChild(celda02);
+
+                tblBody.appendChild(hilera0);
+                
             for (var i = 0; i < 4; i++) {
                 // Crea las hileras de la tabla
                 var hilera = document.createElement("tr");
-
+                
                 // Crea un elemento <td> y un nodo de texto, hace que el nodo de
                 // texto sea el contenido de <td>, ubica el elemento <td> al final
                 // de la hilera de la tabla
