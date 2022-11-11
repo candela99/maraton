@@ -1,0 +1,85 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet"
+        type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/inscripcion.css">
+    <Style>
+        
+
+    </Style>
+    <title>inscripción</title>
+</head>
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html">Inicio</a></li>
+  
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5" id="primercaja"> 
+        <div class="row" id="lugarfuerablanco">
+            <div class="col-8 offset-2" id="lugarblanco">
+                <form id="formulario" class="p-3 mt-5 shadow border">
+                    <h2 class="text-center text-primary">Formulario inscripcion</h2>
+
+                    <label for="fname">Nombre:</label>
+                    <input type="text" id="IDnombre" name="nombre" required placeholder="Campo obligatorio"><span> *</span><br><br>
+                    <label for="lname">Apellido:</label>
+                    <input type="text" id="IDapellido" name="Apellido" required placeholder="Campo obligatorio"><span> *</span><br><br>    
+                    <label for="lname">DNI:</label>
+                    <input type="text" id="IDdni" name="dni" required placeholder="Campo obligatorio"><span> *</span><br><br>   
+                    <label for="fname">Edad:</label>
+                    <input type="number" id="IDedad" name="idedad"required placeholder="Campo obligatorio"><span> *</span><br><br>
+                    
+                    <h4>inscripcion general</h4>
+                    <label for="fname">Elegir Sponsor:</label> <br>
+                    <input type="radio" id="IDsponsor" name="sponsor"required placeholder="Campo obligatorio" value="MCBurger"><span> MCBurger</span><br><br>
+                    <input type="radio" id="IDsponsor1" name="sponsor"required placeholder="Campo obligatorio" value="BuzzCola"><span> BuzzCola</span><br><br>
+                    <input type="radio" id="IDsponsor2" name="sponsor"required placeholder="Campo obligatorio" value="Nakidas"><span> Nakidas</span><br><br>
+                    <input type="radio" id="IDsponsor3" name="sponsor"required placeholder="Campo obligatorio" value="Ninguno"><span> Ninguno, quiero realizar inscripcion personalizada</span><br><br>
+                    <h4>inscripcion personalizada</h4>
+                    <label for="fname">Nombre Sponsor:</label>
+                    <input type="text" id="IDnombreSponsor" name="nombreSponsor"><br><br>
+                    <h6>Descripcion de la empresa: </h6>
+                    <textarea id="IDdescripcionEmpresa" name="descripcionEmpresa" id="mitextarea" cols="40" rows="5"></textarea>
+                    <h4>comentarios</h4>
+                    <label for="fname"></label>
+                    <textarea id="IDcomentarios" name="comentarios" id="mitextarea" cols="40" rows="5">
+                    </textarea><br><br>
+            
+                    <button type="submit">INSCRIBIR</button>
+                    <button type="reset">BORRAR</button>
+                    <p style="color: red;">* Datos obligatorios</p>
+
+                </form>
+                <hr>
+
+             
+            </div>
+        </div>
+        
+    </div>
+    <div >
+            <h3 id="alCostado"  class="text-center fw-light">ff</h3>
+    </div>
+    <script src="js/inscripcion.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+body{
+    background-color: rgba(255, 251, 135, 0.953);
+}
+#formulario{
+    width: 120%;
+    background-color: rgba(143, 216, 158, 0.763);
+    
+}
+#lugarfuerablanco{          
+    width: 60%;
+
+
+}
+#alCostado{
+    margin-right: 2%;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    
+    padding-left: 75%;
+   
+}
+#primercaja{
+    margin-left: 3%;
+    height: 80%;     
+    width: 120%;
+    position: relative;
+}
+#lugarblanco{
+  
+    width: 60%;
+
+}
+label{
+    color: black;
+}
