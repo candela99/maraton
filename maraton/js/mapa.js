@@ -45,3 +45,22 @@ function dibujarCircuito(id_circuito) {
             }
         })
 }
+
+function mostrarCircuito() {
+    let circuito = fetch('https://fasterthanall.herokuapp.com/api/tracks/42').then(res => res.json())
+        .then(response => response.track.coordinates)
+        .then(function (coordenadas) {
+            for (coordenada of coordenadas) {
+                lat = coordenada.lat;
+                console.log(lat);
+                lon = coordenada.lon;
+                console.log(lon);
+                var circle = L.circle([lat, lon], {
+                    color: 'purple',
+                    fillColor: '#f03',
+                    fillOpacity: 0.5,
+                    radius: 4
+                })
+            }
+        })
+}

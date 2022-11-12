@@ -5,6 +5,11 @@ function obtenerCircuitos() {
         .then(data => console.log(data))
 }
 
+function obtenerPosicionesDeCorredores() {
+    let posiciones = fetch('https://fasterthanall.herokuapp.com/api/replays/42')
+        .then(resp => resp.json())
+        .then(data => console.log(data))
+}
 
 
 /*Obtiene las posiciones de los jugadores en la carrera*/
@@ -23,14 +28,6 @@ function obtenerCorredor(id_circuito, id_corredor) {
         .catch(e => console.log(new Error(e)))
 
 }
-/*Devuelve positions={checkpoints (lista de objetos) = {coordinate (lon, lat), runner_id, timeStamp}, runner_id}*/
-function obtenerPosicionesDeCorredor(id_circuito, id_corredor) {
-    let posicionesCorredor = fetch('https://fasterthanall.herokuapp.com/api/replays/' + id_circuito + '/runner/' + id_corredor)
-        .then(resp => resp.json())
-        .then(data => console.log(data))
-        .catch(e => console.log(new Error(e)))
-}
-
 /*Me devuelve lista de corredores (!MUESTRA SIEMPRE EL MISMO CIRCUITO, NO IMPORTA EL ID!)*/
 function obtenerCorredoresDelCircuito(id_circuito) {
     let corredores = fetch('https://fasterthanall.herokuapp.com/api/tracks/' + id_circuito + '/runners/')
@@ -39,12 +36,87 @@ function obtenerCorredoresDelCircuito(id_circuito) {
         .then(corr => console.log(corr))
         .catch(e => console.log(new Error(e)))
 }
-//obtenerCorredoresDelCircuito(42);
+
+function tablaTiempos(){
+
+    var body = document.getElementById("tablaTiempos");
+
+    // Crea un elemento <table> y un elemento <tbody>
+    var tabla = document.createElement("table");
+    var tblBody = document.createElement("tbody");
+
+    // Crea las celdas
+    var hilera0 = document.createElement("tr");
+    var posta1 = document.createElement("tr");
+    var posta2 = document.createElement("tr");
+    var posta3 = document.createElement("tr");
+    var posta4 = document.createElement("tr");
+    var posta5 = document.createElement("tr");
+    var posta6 = document.createElement("tr");
+
+    tblBody.appendChild(hilera0);
+
+    let i = 0;
+    let corredores = fetch('https://fasterthanall.herokuapp.com/api/tracks/42/runners/')
+        .then(res => res.json())
+        .then(corredores => {
+            for(corredor of corredores.runners){
+                fetch('https://fasterthanall.herokuapp.com/api/replays/42/runner/' + corredor.id)
+                .then(resp => resp.json())
+                .then(corr => {
+                    var celda01 = document.createElement("td");
+                    celda01.appendChild(document.createTextNode("id_corredor:" + corr.positions.runner_id))
+                    hilera0.appendChild(celda01);   
+                    console.log(corr);
+
+                    var celda2 = document.createElement("td");
+                    celda2.appendChild(document.createTextNode(corr.positions.checkpoints[0].timeStamp))
+                    posta1.appendChild(celda2);
+
+                    var celda3 = document.createElement("td");
+                    celda3.appendChild(document.createTextNode(corr.positions.checkpoints[1].timeStamp))
+                    posta2.appendChild(celda3);
+
+                    var celda4 = document.createElement("td");
+                    celda4.appendChild(document.createTextNode(corr.positions.checkpoints[2].timeStamp))
+                    posta3.appendChild(celda4);
+
+                    var celda5 = document.createElement("td");
+                    celda5.appendChild(document.createTextNode(corr.positions.checkpoints[3].timeStamp))
+                    posta4.appendChild(celda5);
+
+                    var celda6 = document.createElement("td");
+                    celda6.appendChild(document.createTextNode(corr.positions.checkpoints[4].timeStamp))
+                    posta5.appendChild(celda6);
+
+                    var celda7 = document.createElement("td");
+                    celda7.appendChild(document.createTextNode(corr.positions.checkpoints[5].timeStamp))
+                    posta6.appendChild(celda7);
+                    console.log(corr)
+                })
+                i++;
+                tblBody.appendChild(posta1);
+                tblBody.appendChild(posta2);
+                tblBody.appendChild(posta3);
+                tblBody.appendChild(posta4);
+                tblBody.appendChild(posta5);
+                tblBody.appendChild(posta6);
+            }
+            
+            // posiciona el <tbody> abajo del elemento <table>
+            tabla.appendChild(tblBody);
+            // appends <table> into <body>
+            body.appendChild(tabla);
+            // modifica el atributo "border" de la tabla y lo fija a "2";
+            tabla.setAttribute("border", "2");
+    })   
+}
+
 
 function generarTablaParticipantes() {
     // Obtener la referencia del elemento body
     var body = document.getElementById("tabla");
-
+    
     // Crea un elemento <table> y un elemento <tbody>
     var tabla = document.createElement("table");
     var tblBody = document.createElement("tbody");
@@ -102,6 +174,6 @@ function generarTablaParticipantes() {
             tabla.setAttribute("border", "2");
         })
         .catch(e => console.log(new Error(e)))
-
+        
 
 }
