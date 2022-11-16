@@ -42,3 +42,20 @@ function dibujarCircuito(id_circuito) {
         })    
         
 }
+
+function mostrarCamaras(id_circuito){
+    let camaras = fetch('https://fasterthanall.herokuapp.com/api/webcams/' + id_circuito).then(res => res.json())
+    .then(response => response.webcams)
+    .then(function(webcams) {
+        for (webcam of webcams) {
+            var lat = webcam.coordinate.lat;
+            var lon = webcam.coordinate.lon;
+            var circle = L.circle([lat, lon], {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: 5
+            }).addTo(map);
+        }
+    })
+}
