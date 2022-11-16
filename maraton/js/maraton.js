@@ -135,6 +135,4 @@ function generarTablaParticipantes() {
             tabla.setAttribute("border", "2");
         })
         .catch(e => console.log(new Error(e)))
-        
-
 }

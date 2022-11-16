@@ -59,3 +59,42 @@ function mostrarCamaras(id_circuito){
         }
     })
 }
+
+async function mostrarEvolucionDeCorredor(id_corredor) {
+    const response = await fetch('https://fasterthanall.herokuapp.com/api/replays/42/runner/' + id_corredor);
+    const posicionesJSON = await response.json();
+    const posicionesCorredor = posicionesJSON.positions.checkpoints;
+
+    for (let i = 0; i < posicionesCorredor.length; i++) {
+        const lat = posicionesCorredor[i].coordinate.lat;
+        const lon = posicionesCorredor[i].coordinate.lon;
+        const time = posicionesCorredor[i].timeStamp;
+
+        setTimeout(dibujarPosicion, 1000 * i, lat,lon);
+    }
+}
+
+async function dibujarPosicion(lat,lon) {
+    var circle = L.circle([lat, lon], {
+        color: 'purple',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 3
+    }).addTo(map);
+    map.addLayer(circle);
+    //setTimeout(map.removeLayer(circle), 1000 * 0.5);
+    return circle;
+}
+
+function mostrarEvolucionDeMaraton() {
+    mostrarEvolucionDeCorredor(780);
+    /*
+    let posicionesCorredores = fetch('https://fasterthanall.herokuapp.com/api/tracks/42/runners/').then(res => res.json())
+    .then(function(response) {
+        for (corredor of response.runners) {
+            
+        }
+    })
+    */
+    }
+

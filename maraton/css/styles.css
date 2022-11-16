@@ -120,6 +120,18 @@ hr {
   border-radius: 50px; /*bordes redondos*/
 }
 
+.botonVerEvolucion {
+  border: 1px solid #bd5d38; /*anchura, estilo y color borde*/
+  padding: 10px; /*espacio alrededor texto*/
+  background-color: #bd5d38; /*color botón*/
+  color: #ffffff; /*color texto*/
+  text-decoration: none; /*decoración texto*/
+  text-transform: uppercase; /*capitalización texto*/
+  font-family: var(--bs-body-font-family);
+  font-size: medium;
+  border-radius: 50px; /*bordes redondos*/
+}
+
 .botonGenerarTabla {
   border: 1px solid #bd5d38; /*anchura, estilo y color borde*/
   padding: 10px; /*espacio alrededor texto*/
