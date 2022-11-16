@@ -71,19 +71,23 @@ async function mostrarEvolucionDeCorredor(id_corredor) {
         const time = posicionesCorredor[i].timeStamp;
 
         setTimeout(dibujarPosicion, 1000 * i, lat,lon);
+
     }
 }
 
 async function dibujarPosicion(lat,lon) {
-    var circle = L.circle([lat, lon], {
+    var circle = await L.circle([lat, lon], {
         color: 'purple',
         fillColor: '#f03',
         fillOpacity: 0.5,
         radius: 3
     }).addTo(map);
-    map.addLayer(circle);
-    //setTimeout(map.removeLayer(circle), 1000 * 0.5);
-    return circle;
+    circle.addTo(map);
+    setTimeout(remover, 500, circle);
+}
+
+async function remover(layer) {
+    layer.remove();
 }
 
 function mostrarEvolucionDeMaraton() {
