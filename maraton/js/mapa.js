@@ -28,39 +28,17 @@ L.marker([-34.542462516578325, -58.73393781731669], { draggable: false }).addTo(
     .bindPopup('<b>Centro de salud N°5</b><br>Direccion 0005<br><i>Horario: 8-13</i>');
 
 function dibujarCircuito(id_circuito) {
+    var coordenadasArr = [];
     let circuito = fetch('https://fasterthanall.herokuapp.com/api/tracks/' + id_circuito).then(res => res.json())
         .then(response => response.track.coordinates)
         .then(function (coordenadas) {
             for (coordenada of coordenadas) {
                 lat = coordenada.lat;
-                console.log(lat);
                 lon = coordenada.lon;
-                console.log(lon);
-                var circle = L.circle([lat, lon], {
-                    color: 'red',
-                    fillColor: '#f03',
-                    fillOpacity: 0.5,
-                    radius: 4
-                }).addTo(map);
+                coordenadasArr.push([lat, lon]);
             }
-        })
-}
-
-function mostrarCircuito() {
-    let circuito = fetch('https://fasterthanall.herokuapp.com/api/tracks/42').then(res => res.json())
-        .then(response => response.track.coordinates)
-        .then(function (coordenadas) {
-            for (coordenada of coordenadas) {
-                lat = coordenada.lat;
-                console.log(lat);
-                lon = coordenada.lon;
-                console.log(lon);
-                var circle = L.circle([lat, lon], {
-                    color: 'purple',
-                    fillColor: '#f03',
-                    fillOpacity: 0.5,
-                    radius: 4
-                })
-            }
-        })
+            var polygon = L.polygon([coordenadasArr]).addTo(map);
+            console.log(coordenadasArr);
+        })    
+        
 }
