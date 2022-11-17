@@ -96,6 +96,70 @@ hr {
   border: 0;
   opacity: 0.25;
 }
+.circuito {
+  width: 100%;
+}
+
+.mapa {
+  position: relative;
+  text-align: left;
+}
+
+.cont2 {
+  position: relative;
+  top:0%;
+  text-align: center;
+}
+
+.botones {
+  position: relative;
+}
+
+.tablaPosiciones {
+  position: relative;
+  left: 5%;
+  top:0%;
+  width: 150%;
+}
+
+
+table {
+  table-layout: fixed;
+  width: 60%;
+  border-collapse: collapse;
+  border: 3px solid #000;
+  columns: 2;
+}
+
+th {
+  color: #ffffff; /*color texto*/
+  background-color: #000; /*color botón*/
+}
+
+th, td {
+  font-family: var(--bs-body-font-family);
+  padding: 10px;
+}
+tr {
+  text-align: center;
+  
+  
+}
+
+
+
+.botonVerTiempos {
+  border: 1px solid #bd5d38; /*anchura, estilo y color borde*/
+  padding: 10px; /*espacio alrededor texto*/
+  background-color: #bd5d38; /*color botón*/
+  color: #ffffff; /*color texto*/
+  text-decoration: none; /*decoración texto*/
+  text-transform: uppercase; /*capitalización texto*/
+  font-family: var(--bs-body-font-family);
+  font-size: medium;
+  border-radius: 50px; /*bordes redondos*/
+}
+
 .botonVerCircuito {
   border: 1px solid #bd5d38; /*anchura, estilo y color borde*/
   padding: 10px; /*espacio alrededor texto*/

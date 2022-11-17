@@ -3,18 +3,26 @@ async function tablaPosiciones() {
 
     let body = document.createElement('tbody');
     
+    let fila = document.createElement('tr');
+
+    let th = document.createElement('th');
+    th.innerText = 'PUESTOS';
+    th.colSpan= '2';
+    fila.appendChild(th);
+    body.appendChild(fila);
+
     const posiciones = await generarPosiciones();
     console.log(posiciones);
     var nroPosicion = 1;
     for(posicion of posiciones) {
-        let fila = document.createElement('tr');
+        fila = document.createElement('tr');
 
         let td = document.createElement('td');
         td.innerText = nroPosicion + '°: ' + posicion.nombre + ' ' + posicion.apellido;
         fila.appendChild(td);
 
         td = document.createElement('td');
-        td.innerHTML = `<button id= ${nroPosicion} onClick="mostrarRecorrido(id)">Ver tiempos en el mapa</button>`
+        td.innerHTML = `<button id= ${nroPosicion} onClick="mostrarRecorrido(id)" class="botonVerTiempos">Ver tiempos en el mapa</button>`
         fila.appendChild(td);
         body.appendChild(fila);
         nroPosicion++;
