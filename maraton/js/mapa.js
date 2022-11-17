@@ -119,17 +119,3 @@ async function generarPosiciones() {
     
     return posiciones;
 }
-/*
-async function mostrarEvolucionDeMaraton() {
-    var response = await fetch('https://fasterthanall.herokuapp.com/api/tracks/42/runners/');
-    var resJSON = await response.json();
-    console.log(resJSON.runners);
-    var corredores = await resJSON.runners;
-    let colores = ['purple', 'blue', 'orange', 'green'];
-    let color = 0;
-    for(corredor of corredores) {
-        mostrarEvolucionDeCorredor(corredor.id, colores[color]);
-        color++;
-    }
-    }
-*/
