@@ -39,7 +39,6 @@ function dibujarCircuito(id_circuito) {
                 coordenadasArr.push([lat, lon]);
             }
             var polygon = L.polygon([coordenadasArr]).addTo(map);
-            console.log(coordenadasArr);
         })    
         
 }
@@ -66,24 +65,34 @@ async function mostrarEvolucionDeCorredor(id_corredor) {
     const posicionesJSON = await response.json();
     const posicionesCorredor = posicionesJSON.positions.checkpoints;
 
-    console.log(id_corredor)
+    let corredor;
+    const posiciones = await generarPosiciones();
+    for(corr of posiciones) {
+        if(corr.id_corredor == id_corredor) {
+            corredor = corr;
+        }
+    }
+    
     for (let i = 0; i < posicionesCorredor.length; i++) {
         const lat = posicionesCorredor[i].coordinate.lat;
         const lon = posicionesCorredor[i].coordinate.lon;
         const time = posicionesCorredor[i].timeStamp;
 
-        setTimeout(dibujarPosicion, 2500 * i, lat,lon, new Date(time));
+        setTimeout(dibujarPosicion, 2500 * i, lat,lon, corredor.nombre, corredor.apellido, corredor.sponsor, new Date(time));
     }
 }
 
-async function dibujarPosicion(lat,lon, tiempo) {
+async function dibujarPosicion(lat,lon,nombre, apellido, sponsor, tiempo) {
     var circle = await L.circle([lat, lon], {
         color: 'purple',
         fillColor: '#f03',
         fillOpacity: 0.5,
         radius: 3
     }).addTo(map);
-    circle.bindPopup("Hora: " + tiempo).openPopup();
+    let nombreCorredor = "Corredor: " + nombre + " " + apellido;
+    let hora = "Hora: " + tiempo.getHours() + ":" + tiempo.getMinutes() + ":" + tiempo.getSeconds();
+    let patrocinador = "Sponsor: " + sponsor;
+    circle.bindPopup(nombreCorredor + "<br>" + hora + "<br>" + patrocinador).openPopup();
     setTimeout(remover, 2000, circle);
 }
 
@@ -110,8 +119,7 @@ async function generarPosiciones() {
 
     for(corredor of corredores) {
         const tiempoCorredor = await tiempoDeCorredor(corredor.id);
-        console.log(tiempoCorredor);
-        let posicion = {id_corredor: corredor.id, nombre: corredor.name, apellido: corredor.surname, tiempo: tiempoCorredor};
+        let posicion = {id_corredor: corredor.id, nombre: corredor.name, apellido: corredor.surname, tiempo: tiempoCorredor, sponsor: corredor.sponsor.name};
         posiciones.push(posicion);
 
         posiciones.sort((a,b) => a.tiempo - b.tiempo);
