@@ -71,7 +71,7 @@ async function mostrarEvolucionDeCorredor(id_corredor) {
         const lon = posicionesCorredor[i].coordinate.lon;
         const time = posicionesCorredor[i].timeStamp;
 
-        setTimeout(dibujarPosicion, 1500 * i, lat,lon);
+        setTimeout(dibujarPosicion, 2500 * i, lat,lon);
     }
 }
 
@@ -82,8 +82,8 @@ async function dibujarPosicion(lat,lon) {
         fillOpacity: 0.5,
         radius: 3
     }).addTo(map);
-    circle.addTo(map);
-    setTimeout(remover, 500, circle);
+    circle.bindPopup("Pos").openPopup();
+    setTimeout(remover, 1000, circle);
 }
 
 async function remover(layer) {
