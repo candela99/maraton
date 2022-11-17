@@ -1,3 +1,32 @@
+async function tablaPosiciones() {
+    let tabla = document.getElementById("posiciones");
+
+    let body = document.createElement('tbody');
+    
+    const posiciones = await generarPosiciones();
+    console.log(posiciones);
+    var nroPosicion = 1;
+    for(posicion of posiciones) {
+        let fila = document.createElement('tr');
+
+        let td = document.createElement('td');
+        td.innerText = nroPosicion + '°: ' + posicion.nombre + ' ' + posicion.apellido;
+        fila.appendChild(td);
+
+        td = document.createElement('td');
+        td.innerHTML = `<button onClick="mostrarEvolucionDeCorredor(posicion.id_corredor)">Ver tiempos en el mapa</button>`
+        fila.appendChild(td);
+
+        body.appendChild(fila);
+        nroPosicion++;
+    }
+    tabla.appendChild(body);
+}
+
+
+
+
+
 function tablaTiempos(){
 
     var body = document.getElementById("tablaTiempos");

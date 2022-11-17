@@ -1,5 +1,6 @@
 let map = L.map('map').setView([-34.522832, -58.700531], 16) //coordenadas de la UNGS
 
+
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -70,8 +71,7 @@ async function mostrarEvolucionDeCorredor(id_corredor) {
         const lon = posicionesCorredor[i].coordinate.lon;
         const time = posicionesCorredor[i].timeStamp;
 
-        setTimeout(dibujarPosicion, 1000 * i, lat,lon);
-
+        setTimeout(dibujarPosicion, 1500 * i, lat,lon);
     }
 }
 
@@ -90,15 +90,45 @@ async function remover(layer) {
     layer.remove();
 }
 
-function mostrarEvolucionDeMaraton() {
-    mostrarEvolucionDeCorredor(780);
-    /*
-    let posicionesCorredores = fetch('https://fasterthanall.herokuapp.com/api/tracks/42/runners/').then(res => res.json())
-    .then(function(response) {
-        for (corredor of response.runners) {
-            
-        }
-    })
-    */
-    }
+async function tiempoDeCorredor(id_corredor) {
+    const response = await fetch('https://fasterthanall.herokuapp.com/api/replays/42/runner/' + id_corredor);
+    const posicionesJSON = await response.json();
+    const posicionesCorredor = await posicionesJSON.positions.checkpoints;
+    
+    const tiempo = posicionesCorredor[posicionesCorredor.length - 1].timeStamp - posicionesCorredor[0].timeStamp;
+    return tiempo;
+}
 
+async function generarPosiciones() {
+    var response = await fetch('https://fasterthanall.herokuapp.com/api/tracks/42/runners/');
+    var resJSON = await response.json();
+
+    var corredores = await resJSON.runners;
+
+    let posiciones = [];
+
+    for(corredor of corredores) {
+        const tiempoCorredor = await tiempoDeCorredor(corredor.id);
+        console.log(tiempoCorredor);
+        let posicion = {id_corredor: corredor.id, nombre: corredor.name, apellido: corredor.surname, tiempo: tiempoCorredor};
+        posiciones.push(posicion);
+
+        posiciones.sort((a,b) => a.tiempo - b.tiempo);
+    }
+    
+    return posiciones;
+}
+/*
+async function mostrarEvolucionDeMaraton() {
+    var response = await fetch('https://fasterthanall.herokuapp.com/api/tracks/42/runners/');
+    var resJSON = await response.json();
+    console.log(resJSON.runners);
+    var corredores = await resJSON.runners;
+    let colores = ['purple', 'blue', 'orange', 'green'];
+    let color = 0;
+    for(corredor of corredores) {
+        mostrarEvolucionDeCorredor(corredor.id, colores[color]);
+        color++;
+    }
+    }
+*/
