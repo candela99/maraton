@@ -13,6 +13,7 @@ async function tablaPosiciones() {
 
     const posiciones = await generarPosiciones();
     var nroPosicion = 1;
+    
     for(posicion of posiciones) {
         fila = document.createElement('tr');
 
