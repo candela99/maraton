@@ -72,7 +72,7 @@ async function mostrarEvolucionDeCorredor(id_corredor) {
             corredor = corr;
         }
     }
-    
+
     for (let i = 0; i < posicionesCorredor.length; i++) {
         const lat = posicionesCorredor[i].coordinate.lat;
         const lon = posicionesCorredor[i].coordinate.lon;
@@ -83,17 +83,18 @@ async function mostrarEvolucionDeCorredor(id_corredor) {
 }
 
 async function dibujarPosicion(lat,lon,nombre, apellido, sponsor, tiempo) {
-    var circle = await L.circle([lat, lon], {
-        color: 'purple',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 3
-    }).addTo(map);
+    var personaPNG = L.icon({
+        iconUrl: 'persona.png',
+    
+        iconSize:     [40, 40], // size of the icon
+        popupAnchor:  [0, -15] // point from which the popup should open relative to the iconAnchor
+    });
+    var icono = L.marker([lat, lon], {icon: personaPNG}).addTo(map);
     let nombreCorredor = "Corredor: " + nombre + " " + apellido;
     let hora = "Hora: " + tiempo.getHours() + ":" + tiempo.getMinutes() + ":" + tiempo.getSeconds();
     let patrocinador = "Sponsor: " + sponsor;
-    circle.bindPopup(nombreCorredor + "<br>" + hora + "<br>" + patrocinador).openPopup();
-    setTimeout(remover, 2000, circle);
+    icono.bindPopup(nombreCorredor + "<br>" + hora + "<br>" + patrocinador).openPopup();
+    setTimeout(remover, 2000, icono);
 }
 
 async function remover(layer) {
