@@ -66,24 +66,25 @@ async function mostrarEvolucionDeCorredor(id_corredor) {
     const posicionesJSON = await response.json();
     const posicionesCorredor = posicionesJSON.positions.checkpoints;
 
+    console.log(id_corredor)
     for (let i = 0; i < posicionesCorredor.length; i++) {
         const lat = posicionesCorredor[i].coordinate.lat;
         const lon = posicionesCorredor[i].coordinate.lon;
         const time = posicionesCorredor[i].timeStamp;
 
-        setTimeout(dibujarPosicion, 2500 * i, lat,lon);
+        setTimeout(dibujarPosicion, 2500 * i, lat,lon, new Date(time));
     }
 }
 
-async function dibujarPosicion(lat,lon) {
+async function dibujarPosicion(lat,lon, tiempo) {
     var circle = await L.circle([lat, lon], {
         color: 'purple',
         fillColor: '#f03',
         fillOpacity: 0.5,
         radius: 3
     }).addTo(map);
-    circle.bindPopup("Pos").openPopup();
-    setTimeout(remover, 1000, circle);
+    circle.bindPopup("Hora: " + tiempo).openPopup();
+    setTimeout(remover, 2000, circle);
 }
 
 async function remover(layer) {

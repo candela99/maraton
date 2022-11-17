@@ -14,16 +14,18 @@ async function tablaPosiciones() {
         fila.appendChild(td);
 
         td = document.createElement('td');
-        td.innerHTML = `<button onClick="mostrarEvolucionDeCorredor(posicion.id_corredor)">Ver tiempos en el mapa</button>`
+        td.innerHTML = `<button id= ${nroPosicion} onClick="mostrarRecorrido(id)">Ver tiempos en el mapa</button>`
         fila.appendChild(td);
-
         body.appendChild(fila);
         nroPosicion++;
     }
     tabla.appendChild(body);
 }
 
-
+async function mostrarRecorrido(nro_posicion_jugador) {
+    const posiciones = await generarPosiciones();
+    mostrarEvolucionDeCorredor(posiciones[nro_posicion_jugador - 1].id_corredor);
+}
 
 
 
